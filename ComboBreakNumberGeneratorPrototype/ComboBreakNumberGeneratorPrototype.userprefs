@@ -1,0 +1,17 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameCell.cs">
+    <Files>
+      <File FileName="Assets\Scripts\GameBoard.cs" Line="51" Column="39" />
+      <File FileName="Assets\Scripts\GameCell.cs" Line="17" Column="50" />
+      <File FileName="Assets\Scripts\InputCell.cs" Line="5" Column="1" />
+      <File FileName="Assets\Scripts\SelectionCell.cs" Line="18" Column="16" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\Public\Documents\Unity Projects\ComboBreakNumberGeneratorPrototype\Assets\Scripts\GameBoard.cs" line="51" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
