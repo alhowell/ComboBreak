@@ -9,17 +9,16 @@ public class InputCell : GameCell
 	{
 	}
 
-	void OnMouseDown()
-	{
-		if(gameBoard.GetActiveCell() == this)
-			return;
-		
-		ActivateCell();
-	}
+//	void OnMouseDown()
+//	{
+//		if(gameBoard.GetActiveCell() == this)
+//			return;
+//		
+//		ActivateCell();
+//	}
 	
-	void ActivateCell()
+	public void ActivateCell()
 	{
-		gameBoard.SetActiveCell(this);
 		GetComponent<Renderer>().material.color = Color.green;
 	}
 	

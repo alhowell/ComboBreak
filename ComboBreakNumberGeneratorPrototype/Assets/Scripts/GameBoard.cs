@@ -3,11 +3,11 @@ using System.Collections;
 
 public class GameBoard : MonoBehaviour 
 {
-	[SerializeField]
-	private int BoardSize;
+	public int BoardSize;
 	private InputCell[] gameBoard;
 	private GameCell[] boardCombo;
 	private SelectionCell[] boardSelections;
+	private NumberPool numberPool;
 	private int boardWidth = 0;
 	private int boardHeight = 0;
 	private InputCell activeCell;
@@ -15,12 +15,38 @@ public class GameBoard : MonoBehaviour
 	void Start () 
 	{
 		initializeBoard();
+		numberPool = FindObjectOfType<NumberPool>();
+		numberPool.GenerateNumberPool(BoardSize * 10);
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-	
+		CheckInput();
+	}
+
+	void CheckInput()
+	{
+		if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+		{
+			Vector3 pos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+			RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
+
+			if(hit.collider == null || hit.collider.tag == "Cell")
+			{
+				SetActiveCell(null);
+			}
+			else if(hit.collider.tag == "InputCell")
+			{
+				InputCell cell = hit.collider.GetComponent<InputCell>();
+				SetActiveCell(cell);
+			}
+			else if(hit.collider.tag == "SelectionCell")
+			{
+				SelectionCell cell = hit.collider.GetComponent<SelectionCell>();
+				cell.TransferValue(activeCell);
+			}
+		}
 	}
 
 	/// <summary>
@@ -48,7 +74,6 @@ public class GameBoard : MonoBehaviour
 				{
 					GameObject so = Instantiate(selectionCell, position, Quaternion.identity)as GameObject;
 					boardSelections[selectionsIndex] = so.GetComponent<SelectionCell>();
-					boardSelections[selectionsIndex++].MyValue = Random.Range(1, 9);
 				}
 				else if(y == boardHeight && x < boardWidth)
 				{
@@ -86,10 +111,24 @@ public class GameBoard : MonoBehaviour
 			activeCell.DeactivateCell();
 
 		activeCell = _cell;
+
+		if(activeCell)
+			activeCell.ActivateCell();
 	}
 
 	public InputCell GetActiveCell()
 	{
 		return activeCell;
 	}
+
+	public int[] GetBoardCombo()
+	{
+		int[] combo = new int[boardCombo.Length];
+		for(int i = 0; i < combo.Length; i++)
+		{
+			combo[i] = boardCombo[i].MyValue;
+		}
+		return combo;
+	}
+
 }

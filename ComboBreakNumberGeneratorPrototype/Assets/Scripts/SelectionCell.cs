@@ -3,6 +3,14 @@ using System.Collections;
 
 public class SelectionCell : GameCell 
 {
+	private NumberPool numberPool;
+
+	override protected void Start()
+	{
+		base.Start();
+		numberPool = FindObjectOfType<NumberPool>();
+		MyValue = numberPool.GetNextNumber();
+	}
 
 	// Update is called once per frame
 	void Update () 
@@ -10,12 +18,9 @@ public class SelectionCell : GameCell
 	
 	}
 
-	void OnMouseDown()
+	public void TransferValue(InputCell _cell)
 	{
-		if(gameBoard.GetActiveCell() != null)
-		{
-			gameBoard.GetActiveCell().MyValue = MyValue;
-			MyValue = -1;
-		}
+			_cell.MyValue = MyValue;
+			MyValue = numberPool.GetNextNumber();
 	}
 }

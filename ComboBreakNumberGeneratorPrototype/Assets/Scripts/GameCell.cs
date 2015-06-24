@@ -24,7 +24,7 @@ public class GameCell : MonoBehaviour {
 	private TextMesh text;
 	
 	// Use this for initialization
-	protected void Start () 
+	virtual protected void Start () 
 	{
 		transform.parent = GameObject.Find("GameController").transform;
 		gameBoard = transform.parent.GetComponent<GameBoard>();
